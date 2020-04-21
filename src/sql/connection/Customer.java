@@ -10,8 +10,8 @@ public class Customer {
 	Connection conn = null;
 	Statement stmt = null;
 
-	public void createCustomer(Connection conn, String firstName, String lastName, long phone_number, String Address,
-			String post_code, String country, String Region, String tableName) {
+	public void createCustomer(Connection conn, String name, String email, String Address,
+			String password, String tableName) {
 
 		try {
 			stmt = conn.createStatement();
@@ -23,9 +23,8 @@ public class Customer {
 		// variable with a sql statement as the value!
 
 		String sqlInsert = "INSERT INTO " + tableName
-				+ " (firstName, lastName, phone_number, Address, post_code, country, region) VALUES('" + firstName
-				+ "','" + lastName + "','" + phone_number + "','" + Address + "','" + post_code + "','" + country
-				+ "','" + Region + "')";
+				+ " (name, Address, email, password) VALUES('" + name
+				+ "','" + email + "','" + Address + "','" + password + "')";
 		try {
 			stmt.executeUpdate(sqlInsert);
 			System.out.println("Record inserted!");
@@ -36,7 +35,7 @@ public class Customer {
 
 	}
 
-	public void updateCustomer(Connection conn, String firstName, int CustomerID, String tableName) {
+	public void updateCustomer(Connection conn, int customerID, String name, String tableName) {
 		// Update Customer
 		try {
 			stmt = conn.createStatement();
@@ -45,7 +44,7 @@ public class Customer {
 			e.printStackTrace();
 		}
 		System.out.println("Update Table");
-		String sql3 = "update " + tableName + " set firstName = '" + firstName + "' where CustomerID= '" + CustomerID
+		String sql3 = "update " + tableName + " set name = '" + name + "' where CustomerID= '" + customerID
 				+ "';";
 		try {
 			stmt.executeUpdate(sql3);
@@ -66,7 +65,7 @@ public class Customer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String sql2 = "SELECT CustomerID,firstName,lastName,phone_number,Address,post_code,country,region from "
+		String sql2 = "SELECT * from "
 				+ tableName + " WHERE CustomerID = '"+ CustomerID+ "';";
 		ResultSet rs = null;
 		try {
@@ -79,11 +78,10 @@ public class Customer {
 		try {
 			while (rs.next()) {
 				int CustomerID1 = rs.getInt("CustomerID");
-				String firstName1 = rs.getString("firstName");
-				String lastName1 = rs.getString("lastName");
-				String Address1 = rs.getString("Address");
-				System.out.println("CustomerID: " + CustomerID1 + " First Name: " + firstName1 + " Last Name: " + lastName1
-						+ "Address:" + Address1);
+				String firstName1 = rs.getString("name");
+				String lastName1 = rs.getString("address");
+
+				System.out.println("CustomerID: " + CustomerID1 + " First Name: " + firstName1 + " Last Name: " + lastName1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

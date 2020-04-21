@@ -20,8 +20,8 @@ public class SQLGamesDB {
 	}
 
 	public SQLGamesDB() {
-		this.JDBC_DRIVER = "com.mysql.jdbc.Driver";
-		this.DB_URL = "jdbc:mysql://localhost:3306/customerdb?useSSL=false";
+		this.JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+		this.DB_URL = "jdbc:mysql://localhost:3306/gamedb?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 		this.USER = "root";
 		this.PASS = "root";
 
@@ -49,11 +49,26 @@ public class SQLGamesDB {
 		SQLGamesDB customer = new SQLGamesDB();
 		Connection conn = customer.getConnection();
 		Customer cm1 = new Customer();
-		
 
-		cm1.createCustomer(conn, "James", "Bond", 012335, "This Road", "BM13UB32", "United Kingdom", "London",
-				"customer");
-		cm1.selectCustomer(conn, 2, "customer");
+		//cm1.createCustomer(conn, "James", "Tom@gmail.com", "This Road", "password", "customers");
+		//cm1.createCustomer(conn, "Tom", "Tom@gmail.com", "This Road", "password", "customers");
+		//cm1.selectCustomer(conn, 2, "customers");
+		
+		Product p = new Product();
+		//p.addProduct(conn, "T-shirt", 1000, 44.44);
+		//p.addProduct(conn, "Jacket", 2000, 54.44);
+		
+		//p.deleteProduct(conn, 1);
+		//p.updateProduct(conn, "Shirt", 1);
+		
+		Orders order = new Orders();
+		order.createOrder(conn, 8, 4);
+		
+		order.selectOrder(conn, 8, 1);
+				
+		
+		
+		
 	
 	}
 
